@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{A16C2E12-D792-48EF-B2EC-459363CEE8DA}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="SecuLearn.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\IPCamCapture\IPCamCapture.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="SecuLearn">
+        <MSBuild Projects="SecuLearn.dproj"/>
+    </Target>
+    <Target Name="SecuLearn:Clean">
+        <MSBuild Projects="SecuLearn.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SecuLearn:Make">
+        <MSBuild Projects="SecuLearn.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="IPCamCapture">
+        <MSBuild Projects="..\IPCamCapture\IPCamCapture.dproj"/>
+    </Target>
+    <Target Name="IPCamCapture:Clean">
+        <MSBuild Projects="..\IPCamCapture\IPCamCapture.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="IPCamCapture:Make">
+        <MSBuild Projects="..\IPCamCapture\IPCamCapture.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="SecuLearn;IPCamCapture"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="SecuLearn:Clean;IPCamCapture:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="SecuLearn:Make;IPCamCapture:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
